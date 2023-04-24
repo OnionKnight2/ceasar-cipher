@@ -7,13 +7,17 @@
   Use #each_char to access every letter
   Use #gsub! method to substitute characters
   Use #ord method to convert from a char to ascii number and use #chr to reverse
+  Check if a current character is a letter. If it's not, it stays the same
 =end
 
 require 'pry-byebug'
 
 def ceasar_cipher(string, shift)
     string.each_char do |char|
-        string.gsub!(char, (char.ord + shift).chr)
+        # string.gsub!(char, (char.ord + shift).chr)
+        if ("a".."z").include?(char) || ("A".."Z").include?(char)
+            string.gsub!(char, (char.ord + shift).chr)
+        end
     end
     puts string
 end
