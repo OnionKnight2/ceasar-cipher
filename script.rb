@@ -8,17 +8,31 @@
   Use #gsub! method to substitute characters
   Use #ord method to convert from a char to ascii number and use #chr to reverse
   Check if a current character is a letter. If it's not, it stays the same
+  Check if adding shift to a character ascii goes out of range for letters
 =end
 
 require 'pry-byebug'
 
 def ceasar_cipher(string, shift)
     string.each_char do |char|
-        # string.gsub!(char, (char.ord + shift).chr)
-        if ("a".."z").include?(char) || ("A".."Z").include?(char)
-            string.gsub!(char, (char.ord + shift).chr)
+        # Check if current character is an upcase letter, downcase letter or a different type of character
+        if char.ord >= 65 && char.ord <= 90
+            # Check if a shifted ascii character is out of bounds
+            if char.ord + shift > 90
+                string.sub!(char, (char.ord + shift - 26).chr)
+            else 
+                string.sub!(char, (char.ord + shift).chr)
+            end
+        elsif char.ord >= 97 && char.ord <= 122
+            # Check if a shifted ascii character is out of bounds
+            if char.ord + shift > 122
+                string.sub!(char, (char.ord + shift - 26).chr)
+            else
+                string.sub!(char, (char.ord + shift).chr)
+            end
         end
     end
+
     puts string
 end
 
