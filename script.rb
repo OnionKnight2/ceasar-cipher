@@ -4,13 +4,18 @@
   down the alphabet. For example, with a left shift of 3, D would be replaced by A, E would become B, and so on. 
 
   Goal is to receive a string, shift every letter down the alphabet shift number of times and return the changed string
+  Use #each_char to access every letter
+  Use #gsub! method to substitute characters
   Use #ord method to convert from a char to ascii number and use #chr to reverse
 =end
 
 require 'pry-byebug'
 
 def ceasar_cipher(string, shift)
-    puts (string.ord + shift).chr
+    string.each_char do |char|
+        string.gsub!(char, (char.ord + shift).chr)
+    end
+    puts string
 end
 
-ceasar_cipher("h", 5)
+ceasar_cipher("What a string!", 5)
