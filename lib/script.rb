@@ -51,5 +51,3 @@ def ceasar_cipher(string, shift)
 
     string_array.join('')
 end
-
-ceasar_cipher("What a string string strrrring!", 5)
